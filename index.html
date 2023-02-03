@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>havij</title>
+    <meta name="viewport" content="width=1280">
+	<link rel="icon" href="images/i.png">
+</head>
+
+<body>
+
+
+
+
+
+<div class="page-1 flexor">
+
+<div class="page-1-header" >
+<span>هویج</span>
+<img src="images/i.png" >
+</div>
+
+<div class="page-1-body" >
+<span>نرم افزار انتخاب واحد سریع</span>
+
+<div>
+<span style="font-size:18px;" >طراحی و توسعه با
+<img style="width:30px;margin:7px;" src="images/heart.png">
+توسط
+<span class="ext-link">هدیش</span>
+</span>
+</div>
+
+</div>
+
+<span style="font-size:25px;margin-top:20px;" >: کد درس ها</span>
+
+<div class="fields" >
+<input class="course-code code1" type="text" placeholder="1" >
+<input class="course-code code2" type="text" placeholder="2" >
+<input class="course-code code3" type="text" placeholder="3" >
+<input class="course-code code4" type="text" placeholder="4" >
+<input class="course-code code5" type="text" placeholder="5" >
+<input class="course-code code6" type="text" placeholder="6" >
+<input class="course-code code7" type="text" placeholder="7" >
+<input class="course-code code8" type="text" placeholder="8" >
+<input class="course-code code9" type="text" placeholder="9" >
+<input class="course-code code10" type="text" placeholder="10" >
+
+<div class="hl_btn_type_3 start_havij">شروع</div>
+<div class="hl_btn_type_3 fetch_data"><img src="images/file.png"></div>
+
+</div>
+
+</div>
+
+
+
+
+
+<script>
+
+const { contextBridge, ipcRenderer } = require('electron')
+window.$ = require('jquery');
+const open = require('open');
+
+var codes =  [];
+
+$(".start_havij").click(function()
+{
+
+codes =  [];
+
+
+for(var i=1;i<11;i++)
+{
+var str = document.getElementsByClassName('code'+i)[0].value;
+if(str) codes.push(str);
+}
+
+codes = (codes.map(num => [(num+'').slice(0,2),(num+'').slice(2,4),(num+'').slice(4,7),(num+'').slice(7,9)])).flat(1);
+
+ipcRenderer.send('hi',codes);
+
+});
+
+$(".fetch_data").click(function()
+{
+
+fetch('data.json').then((response) => response.json()).then((result) =>
+{ 
+for(var i=1;i<11;i++) $(".code"+i).val(result[i]);
+});
+
+});
+
+
+$(".ext-link").click(function()
+{
+open('https://hadish.top');
+});
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
