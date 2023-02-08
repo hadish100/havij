@@ -1,6 +1,8 @@
 <img src="https://github.com/hadish100/havij/blob/master/images/9.png">
 <h1>چجوری از هویج استفاده کنیم ؟</h1>
-<p>اول هویج رو از <a href="https://s27.picofile.com/file/8459482750/havij.zip.html">این لینک</a> دانلود کنید و فایل exe رو اجرا کنید</p>
+<p>اول هویج رو از <a href="https://s26.picofile.com/file/8459628984/havij_app.zip.html">این لینک</a> دانلود کنید و فایل exe رو اجرا کنید
+  <b>(رمز : 123456)</b>
+</p> 
 <p>فرض کنید ما دو تا کد درس رو به عنوان ورودی وارد می کنیم</p>
 
 <p align="center">
