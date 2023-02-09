@@ -12,7 +12,7 @@
 وقتی شروع رو می زنیم ، یه آرایه داخل سیستم ما به شکل زیر ساخته می شه :
 </h4>
 <p align="center">
-<img src="https://github.com/hadish100/havij/blob/master/images/92.png">
+<img src="https://github.com/hadish100/havij/blob/master/images/92.gif">
 </p>
   <h4>
 حالا شما دو تا کار می تونید رو این آرایه انجام بدید :
