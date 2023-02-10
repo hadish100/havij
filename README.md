@@ -28,6 +28,6 @@
   </h4>
   
 <p align="center">
-<img src="https://github.com/hadish100/havij/blob/master/images/93.png">
+<img src="https://github.com/hadish100/havij/blob/master/images/94.png">
 </p>
   
