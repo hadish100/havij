@@ -11,7 +11,25 @@
 
 <body>
 
+<div class="navigation-bar" >
 
+
+	
+	<img class="arrow-left2" src="images/arrow2.png" /> 
+	<img class="arrow-left1" src="images/arrow1.png" /> 
+
+
+
+	<div class="inner-navigator">
+		<div>
+		</div>
+	</div>
+
+	<img class="arrow-right1" src="images/arrow1.png" /> 
+	<img class="arrow-right2" src="images/arrow2.png" /> 
+
+
+</div>
 
 
 
@@ -49,8 +67,17 @@
 <input class="course-code code9" type="text" placeholder="9" >
 <input class="course-code code10" type="text" placeholder="10" >
 
-<div class="hl_btn_type_3 start_havij">شروع</div>
-<div class="hl_btn_type_3 fetch_data"><img src="images/file.png"></div>
+<div class="hl_btn_type_3 start_havij">
+	<span>شروع</span>
+	<img src="images/play.png" >
+</div>
+
+
+<div class="hl_btn_type_3 question_icon"><img title="آموزش استفاده" src="images/question.png"></div>
+<div class="hl_btn_type_3 fetch_data"><img title="خواندن از روی فایل" src="images/file.png"></div>
+<div class="hl_btn_type_3 random_fill"><img title="مقادیر رندوم" src="images/dices.png"></div>
+<div class="hl_btn_type_3 eraser"><img title="پاک کردن فیلد ها" src="images/eraser.png"></div>
+
 
 </div>
 
@@ -62,44 +89,227 @@
 
 <script>
 
+
+	
+
 const { contextBridge, ipcRenderer } = require('electron')
 window.$ = require('jquery');
 const open = require('open');
+
+function random_9_digit_int()
+{
+	return Math.floor(Math.random() * 900000000) + 100000000;
+}
+
+
+function set_focused_code(n,reset)
+{
+	$(".code-div").eq(n).addClass("focused-code");
+	$('.code-div').not(':eq('+n+')').removeClass("focused-code");
+	if(reset) $(".inner-navigator > div").css("transform","translateX(0px)") 
+}
+
+function move_focused_code(n,no_ipc)
+{
+	var len = document.querySelectorAll(".code-div").length;
+	var current_index;
+
+	for(var i=0;i<len;i++)
+	{
+		if($(".code-div").eq(i).hasClass("focused-code")) 
+		{
+			current_index = i;
+			break;
+		}
+	}
+
+	var final_index = current_index+n;
+	if(final_index>=len || final_index < 0) return;
+	if(n==1||n==-1) 
+	{
+		set_focused_code( final_index );
+		if(!no_ipc) ipcRenderer.send('hi', codes.slice(final_index) );
+	}
+
+	else if(n==4||n==-4) 
+	{
+		set_focused_code( final_index - final_index%4 )
+		if(!no_ipc) ipcRenderer.send('hi', codes.slice(final_index - final_index%4) );
+	}
+	$(".inner-navigator > div").css("transform","translateX(-"+(Math.floor(final_index/4))*320+"px)")
+
+}
+
+ipcRenderer.on('move_forward', (event, data) => { move_focused_code(+1,true);});
+
+$(".arrow-left1").click(function()
+{
+	move_focused_code(-1);
+});
+
+$(".arrow-right1").click(function()
+{
+	move_focused_code(+1);
+});
+
+$(".arrow-left2").click(function()
+{
+	move_focused_code(-4);
+});
+
+$(".arrow-right2").click(function()
+{
+	move_focused_code(+4);
+});
+
+
+$(".eraser").click(function()
+{
+	if(!$(".start_havij").hasClass("started"))
+	{
+		for(var i=1;i<11;i++) $(".code"+i).val('');
+	}
+});
+
+$(".random_fill").click(function()
+{
+	if(!$(".start_havij").hasClass("started"))
+	{
+		for(var i=1;i<11;i++) $(".code"+i).val(random_9_digit_int());
+	}
+});
 
 var codes =  [];
 
 $(".start_havij").click(function()
 {
+	var existance_flag = 0;
+	var character_count = 0;
+	for(var i=1;i<11;i++)
+	{
+		var str = document.getElementsByClassName('code'+i)[0].value;
+		character_count += str.length;
+		if(str) existance_flag = 1;
+	}
 
-codes =  [];
+	if(existance_flag == 0 || (character_count%9!=0 && !$(".start_havij").hasClass("started"))) return;
 
 
-for(var i=1;i<11;i++)
-{
-var str = document.getElementsByClassName('code'+i)[0].value;
-if(str) codes.push(str);
-}
 
-codes = (codes.map(num => [(num+'').slice(0,2),(num+'').slice(2,4),(num+'').slice(4,7),(num+'').slice(7,9)])).flat(1);
+	codes =  [];
 
-ipcRenderer.send('hi',codes);
+
+	for(var i=1;i<11;i++)
+	{
+		var str = document.getElementsByClassName('code'+i)[0].value;
+		if(str) codes.push(str);
+	}
+
+	codes = (codes.map(num => [(num+'').slice(0,2),(num+'').slice(2,4),(num+'').slice(4,7),(num+'').slice(7,9)])).flat(1);
+
+
+
+
+	if($(".start_havij").hasClass("started"))
+	{
+		$(".start_havij").removeClass("started");
+		$(".start_havij span").css("opacity","0");
+		$(".start_havij span").css("transform","scale(0.9)");
+		$(".start_havij img").css("opacity","0");
+		$(".start_havij img").css("transform","scale(0.9)");
+		$(".navigation-bar").css("bottom","-50px");
+		ipcRenderer.send('bye',codes);
+		codes = []
+
+
+		setTimeout(function()
+		{
+			$(".start_havij span").text("شروع");
+			$(".start_havij img").attr("src","images/play.png");			
+		},150);
+
+		setTimeout(function()
+		{
+			$(".start_havij span").css("opacity","1");
+			$(".start_havij span").css("transform","scale(1)");
+			$(".start_havij img").css("opacity","1");
+			$(".start_havij img").css("transform","scale(1)");
+		},350);
+	
+	}
+
+	else
+	{
+		$(".start_havij").addClass("started");
+		$(".start_havij span").css("opacity","0");
+		$(".start_havij span").css("transform","scale(0.9)");
+		$(".start_havij img").css("opacity","0");
+		$(".start_havij img").css("transform","scale(0.9)");
+		$(".navigation-bar").css("bottom","30px");
+		document.querySelectorAll(".inner-navigator > div")[0].innerHTML = ""
+		ipcRenderer.send('hi',codes);
+		set_focused_code(0,true);
+
+		for(var i=0;i<codes.length;i+=4)
+		{
+			document.querySelectorAll(".inner-navigator > div")[0].innerHTML +=
+			`
+			<div>
+				<div class="code-div focused-code" >${codes[i]}</div>
+				<div class="code-div" >${codes[i+1]}</div>
+				<div class="code-div" >${codes[i+2]}</div>
+				<div class="code-div" >${codes[i+3]}</div>
+			</div>
+			`
+		}
+		
+
+
+		
+		setTimeout(function()
+		{
+			$(".start_havij span").text("توقف");	
+			$(".start_havij img").attr("src","images/pause.png");		
+		},150);
+
+		setTimeout(function()
+		{
+			$(".start_havij span").css("opacity","1");
+			$(".start_havij span").css("transform","scale(1)");
+			$(".start_havij img").css("opacity","1");
+			$(".start_havij img").css("transform","scale(1)");
+		},350);
+	}
+
+
+
+
+
+
 
 });
 
 $(".fetch_data").click(function()
 {
-
-fetch('data.json').then((response) => response.json()).then((result) =>
-{ 
-for(var i=1;i<11;i++) $(".code"+i).val(result[i]);
-});
+	if(!$(".start_havij").hasClass("started"))
+	{ 
+		fetch('data.json').then((response) => response.json()).then((result) =>
+		{
+			for(var i=1;i<11;i++) $(".code"+i).val(result[i]);
+		});
+	}
 
 });
 
 
 $(".ext-link").click(function()
 {
-open('https://hadish.top');
+	open('https://hadish.top');
+});
+
+$(".question_icon").click(function()
+{
+	open('https://github.com/hadish100/havij/blob/master/README.md');
 });
 
 

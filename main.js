@@ -14,10 +14,10 @@ const createWindow = () =>
 
 
 ipcMain.on('hi', function(e,data){codes = data;havij_i = 0;clipboard.writeText(codes[havij_i++]);});
+ipcMain.on('bye', function(e,data){codes = [];havij_i = 0;clipboard.writeText("");});
 win.loadFile('index.html');
 
 }
-
 
 
 app.whenReady().then(() => 
@@ -27,8 +27,14 @@ createWindow();
 
 	const ret = globalShortcut.register('CommandOrControl+B', () => 
 	{
-	if(codes[havij_i]) clipboard.writeText(codes[havij_i++]);
-	else clipboard.writeText("");
+		if(codes[havij_i]) 
+		{
+			clipboard.writeText(codes[havij_i]);
+			if(codes[havij_i+1]) havij_i++;
+			win.webContents.send('move_forward', 'Hola');
+		}
+
+		else clipboard.writeText("");
 	});
 
 

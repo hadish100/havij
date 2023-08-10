@@ -1,7 +1,6 @@
 module.exports = {
   packagerConfig: {},
   rebuildConfig: {},
-
   packagerConfig: 
 	{
     icon: 'images/i'
