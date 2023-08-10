@@ -1,4 +1,4 @@
-<img src="https://github.com/hadish100/havij/blob/master/images/9.png">
+<img src="https://github.com/hadish100/havij/blob/master/images/999.png">
 <p align="center">
 <img src="https://github.com/hadish100/havij/blob/master/images/99.gif">
 </p>
@@ -14,7 +14,7 @@
 <h4>فرض کنید ما دو تا کد درس رو به عنوان ورودی وارد می کنیم : </h4>
 
 <p align="center">
-<img src="https://github.com/hadish100/havij/blob/master/images/91.png">
+<img src="https://github.com/hadish100/havij/blob/master/images/998.png">
 </p>
 <h4>
 وقتی شروع رو می زنیم ، یه آرایه داخل سیستم ما به شکل زیر ساخته می شه :
