@@ -3,7 +3,7 @@
 <img src="https://github.com/hadish100/havij/blob/master/images/99.gif">
 </p>
 <h1>چجوری از هویج استفاده کنیم ؟</h1>
-<h4>اول هویج رو از <a href="https://s26.picofile.com/file/8459628984/havij_app.zip.html">این لینک</a> دانلود کنید و فایل <b>havij.exe</b> رو اجرا کنید
+<h4>اول هویج رو از <a href="https://drive.google.com/file/d/11-fgAwF7A0qhqjFro-BAW_2rKdObggR_/view?usp=sharing">این لینک</a> دانلود کنید و فایل <b>havij.exe</b> رو اجرا کنید
   <b>(رمز : 123456)</b>
 </h4> 
 
@@ -27,6 +27,7 @@
  </h4>
 <h3 align="right" >ctrl + V :point_left: </h3> <h4>خونه ای که فلش روی اون هست رو پیست می کنه</h4>
 <h3 align="right" >ctrl + B :point_left: </h3> <h4>فلش رو یه خونه به سمت جلو منتقل می کنه</h4>
+<h4 align="right" > :anger: از طریق خود برنامه هم می تونید روی چیزی که پیست می شه کنترل داشته باشید  </h4>
 <h4>همین ! و اینجوری سرعت شما تو انتخاب واحد چند برابر می شه ! موفق باشید :heart: </h4>
 <h1>:warning: توجه</h1>
 <h4>
