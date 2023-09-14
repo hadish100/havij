@@ -2,6 +2,9 @@
 <p align="center">
 <img src="https://github.com/hadish100/havij/blob/master/images/99.gif">
 </p>
+<p align="center">
+<img src="https://github.com/hadish100/havij/blob/master/images/922.gif">
+</p>
 <h1>چجوری از هویج استفاده کنیم ؟</h1>
 <h4>اول هویج رو از <a href="https://drive.google.com/file/d/11-fgAwF7A0qhqjFro-BAW_2rKdObggR_/view?usp=sharing">این لینک</a> دانلود کنید و فایل <b>havij.exe</b> رو اجرا کنید
   <b>(رمز : 123456)</b>
@@ -22,6 +25,7 @@
 <p align="center">
 <img src="https://github.com/hadish100/havij/blob/master/images/92.gif">
 </p>
+
   <h4>
 حالا شما دو تا کار می تونید رو این آرایه انجام بدید :
  </h4>
