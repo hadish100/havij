@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vazir-font/29.0.2/font-face.css" rel="stylesheet">
+    <title>Golestan Test</title>
+</head>
+<style>
+body
+{
+    margin:0;
+    padding:0;
+    border:none;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    align-content:center;
+    flex-direction:column;
+    font-family: 'Vazir', sans-serif;
+}
+
+.add_line
+{
+    width:40%;
+    height:50px;
+    border-radius:20px;
+    margin-top:20px;
+    margin-bottom:30px;
+    background-color:rgb(124, 124, 124);
+    color:white;
+    font-size:20px;
+    text-align:center;
+    line-height:50px;
+    cursor:pointer;
+    transition:all 0.3s;
+}
+
+.add_line:hover
+{
+    background-color:rgba(73, 73, 73);
+}
+
+.input1,.input2,.input4
+{
+    width:30px;
+    margin:0 5px;
+}
+
+.input3
+{
+    width:50px;
+    margin:0 5px;
+}
+</style>
+<body>
+    <div class="add_line" onclick="add_line()">
+        سطر جدید
+    </div>
+
+
+
+<script>
+
+
+
+        function add_line()
+        {
+
+            var div = document.createElement('div');
+            div.className = 'line';
+            div.innerHTML = `<input class="input1" maxlength="2" type="text">
+            <input class="input2" maxlength="2" type="text">
+            <input class="input3" maxlength="3" type="text">
+            <input class="input4" maxlength="2" type="text">`;
+            document.body.appendChild(div);
+
+            var inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('input', function(){
+                    if(this.value.length >= this.maxLength)
+                    {
+                        var next = this.nextElementSibling;
+                        if(next == null)
+                        {
+                            var parent = this.parentElement;
+                            var next_parent = parent.nextElementSibling;
+                            if(next_parent != null)
+                            {
+                                var next_input = next_parent.querySelector('input');
+                                next_input.focus();
+                            }
+                        }
+                        else
+                        {
+                            next.focus();
+                        }
+                    }
+                });
+            });
+
+        }
+
+
+
+
+</script>
+
+</body>
+</html>
